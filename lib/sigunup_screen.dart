@@ -36,7 +36,7 @@ class _SignupScreenState extends State<SignupScreen> {
               children: <Widget>[
                 SignupDetailsField(hintText: 'First Name', txt: TextCapitalization.sentences,),
                 SignupDetailsField(hintText: 'Last Name', txt: TextCapitalization.sentences,),
-                SignupDetailsField(hintText: 'Register Number',),
+                SignupDetailsField(hintText: 'Register Number', txt: TextCapitalization.characters,),
 
                 Row(
                   children: <Widget>[
