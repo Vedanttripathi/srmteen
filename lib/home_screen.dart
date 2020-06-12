@@ -7,6 +7,9 @@ import 'reusable_card.dart';
 import 'constants.dart';
 import 'data.dart';
 import 'calculate_bill.dart';
+import 'profile_screen.dart';
+import 'billing_screen.dart';
+import 'helper.dart';
 
 class HomeScreen extends StatefulWidget {
   static String id = "homescreen";
@@ -25,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        elevation: 0.0,
         title: Text(
           'SRMteen',
           style: kAppBarTextStyle,
@@ -32,10 +36,32 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: CircleAvatar(
-              backgroundImage: AssetImage('images/undraw_male_avatar_323b.png'),
-              radius: 25.0,
-              backgroundColor: Colors.blue,
+            child: Hero(
+              tag: 'profile',
+              child: GestureDetector(
+                onTap: (){
+                  //TODO Add the navigation to the profile screen
+                  Navigator.pushNamed(context, ProfileScreen.id);
+                },
+                child: CircleAvatar(
+                  backgroundImage: AssetImage('images/undraw_male_avatar_323b.png'),
+                  radius: 25.0,
+                  backgroundColor: Colors.blue,
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: 15.0,),
+            child: GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(context, BillingScreen.id);
+              },
+              child: Icon(
+              FontAwesomeIcons.shoppingCart,
+                color: Colors.black,
+                size: 28.0,
+              ),
             ),
           ),
         ],
@@ -119,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      ReusableCard(foodName: 'Butter Chicken', imageLocation: 'images/Butter Chicken.jpeg', price: '\u{20B9} 150'),
+                      ReusableCard(foodName: 'Butter Chicken', imageLocation: 'images/butterchicken.jpeg', price: '\u{20B9} 150'),
                       ReusableCard(foodName: 'Biryani', imageLocation: 'images/biryani.jpeg', price: '\u{20B9} 120'),
                     ],
                   ),
@@ -143,7 +169,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 //TODO Add the functionality to go to the cart screnn and then pay there.
                 var calc = CalculateBill(itemList: Provider.of<Data>(context).itemList);
                 int total = calc.calculateTotal();
-                print(total);
+                List<Helper> foodList = Provider.of<Data>(context).returnFoodNameList();
+                Provider.of<Data>(context).setDefault();
+                Provider.of<Data>(context).allelements();
+                Navigator.push(context, MaterialPageRoute(builder: (context) => BillingScreen(
+                  billList: foodList,
+                  total: total,
+                ),),);
               },
             ),
           ],

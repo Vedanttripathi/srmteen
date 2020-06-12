@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'helper.dart';
 
 class Data extends ChangeNotifier
 {
@@ -21,11 +22,42 @@ class Data extends ChangeNotifier
     notifyListeners();
   }
 
-//  void allelements()
+  void allelements()
+  {
+    print('This is the start');
+    itemList.forEach((k,v) => print('${k}: ${v}'));
+    print('This is the end');
+  }
+
+  List<Helper> returnFoodNameList()
+  {
+    List<Helper> foodList = List<Helper>();
+    itemList.forEach((k, v) {
+      if (v > 0) {
+        foodList.add(Helper(foodname: k, quantity: v));
+      }
+    }
+    );
+    return foodList;
+  }
+
+  void setDefault()
+  {
+    itemList.forEach((k, v){
+      itemList[k] = 0;
+    });
+  }
+
+//  List<String> returnQuantityList()
 //  {
-//    print('This is the start');
-//    itemList.forEach((k,v) => print('${k}: ${v}')); TODO use this same syntax to print all the elements on the billing page.
-//    print('This is the end');
+//    List<String> quantityList;
+//    itemList.forEach((k, v) {
+//      if (v > 0) {
+//        quantityList.add(v);
+//      }
+//    }
+//    );
+//    return quantityList;
 //  }
 
 }

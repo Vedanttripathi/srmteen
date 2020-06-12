@@ -19,7 +19,7 @@ class FoodDetails extends StatelessWidget {
         width: double.infinity,
         child: Column(
           children: <Widget>[
-            CircleAvatar(
+            CircleAvatar( //TODO Add the functionality of hero animation
               child: Image.asset(imageLocation),
               radius: 30.0,
             )

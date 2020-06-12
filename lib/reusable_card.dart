@@ -34,6 +34,7 @@ class _ReusableCardState extends State<ReusableCard> {
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(30.0)),
@@ -44,25 +45,31 @@ class _ReusableCardState extends State<ReusableCard> {
                     ),
                 ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 1.0),
-              child: Text(
-                  widget.foodName,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.0,
-                      letterSpacing: 2.0
-                  ),
+            Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 1.0),
+                child: Text(
+                    widget.foodName,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                        letterSpacing: 2.0
+                    ),
+                ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              child: Text(
-                widget.price,
-                style: TextStyle(
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
+            Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                child: Text(
+                  widget.price,
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
                 ),
               ),
             ),
@@ -87,7 +94,7 @@ class _ReusableCardState extends State<ReusableCard> {
                     onPressed: (){
                       setState(() {
                         if (_itemcount > 0)
-                          _itemcount--;
+                          --_itemcount;
                         //TODO Add the quantity to the map data usin provider package like : itemList[foodNAme] = _itemcount
                         Provider.of<Data>(context).addValues(widget.foodName, _itemcount);
                       });
@@ -119,7 +126,7 @@ class _ReusableCardState extends State<ReusableCard> {
                     onPressed: (){
                       setState(() {
                         if (_itemcount < 10)
-                          _itemcount++;
+                          ++_itemcount;
                         Provider.of<Data>(context).addValues(widget.foodName, _itemcount);
                       });
                     },
